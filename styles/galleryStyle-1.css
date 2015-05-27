@@ -1,0 +1,70 @@
+.imgGal {
+    max-width: 250px;
+}
+.commentGal{
+    float:left;
+    width: 95%;
+    height:40px;
+    padding:5px;
+    text-align: center;
+    margin:5px ;
+}
+.checkGal {
+    margin-left:40% ;
+
+}
+td.comment{
+    width:300px ;
+    padding:3px ;
+}
+/** стили для вывода галереи **/
+.btGal{
+    margin-left: -10px;
+    background-color: #cccc99 ;
+    width:150px ;
+    border-radius: 10px;
+}
+.btGalEdit{
+    margin-left: 10px;
+    margin-top: 0;
+    background-color: #cccc99 ;
+    width:150px ;
+    border-radius: 10px;
+    height:40px ;
+    vertical-align: top;
+}
+.imgBlock{
+    display: inline-block;
+    width-max:400px;
+    heght-max:400px;
+    min-width: 150px ;
+    border:2px solid #000;
+    border-radius:10px ;
+    margin:5px ;
+    background-color: #c3c3af;
+    vertical-align: top;
+}
+.imgBlock img{
+    position:relative;
+    top:5px;
+    left:0px;
+    max-width: 250px;
+    min-width: 50px;
+    margin: 5px ;
+   /* width:98% ;*/
+
+
+}
+.imgBlock div{
+    position: relative;
+    bottom: -12px;
+    height: 50px;
+    text-align: center;
+    width: 95%;
+    left: 5px;
+
+
+}
+.galFformEdit{
+    background-color: #c3c3af;
+}

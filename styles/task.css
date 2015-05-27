@@ -1,0 +1,57 @@
+body{
+    height:auto;
+    left:0; top:0;
+    bottom:150px;
+    background-color: #F5F5DC;
+}
+#header{
+    left:0 ;
+    top:0 ;
+    padding: 10px ;
+    width:100% ;
+}
+#content,#contentShow,#contentShowHalh{
+    position: absolute;
+    top: 58px;
+    width: 100%;
+    bottom: -30px;
+    padding: 10px;
+    overflow: auto;
+    display: block;
+ //   border: 2px solid #000;
+    margin-bottom: 200px;
+    background-color: #F5F5DC;
+}
+#contentShow {
+    margin-bottom:20px ;
+}
+#contentShowHalh {
+    margin-bottom:100px ;
+}
+#footer,#footerHalf {
+    position: fixed; /* Фиксированное положение */
+    height:150px ;
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 10px; /* Поля вокруг текста */
+
+    color: black; /* Цвет текста */
+    width: 98%; /* Ширина слоя */
+    display: block;
+   /* border:4px solid darkolivegreen ;*/
+}
+#footerHalf {
+    height:100px ;
+}
+a.menu{
+    font-size:20px;
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color:#000 ;
+}
+
+
+a.menu:hover{
+    font-style:italic;
+}
+#footer,#topMenu{
+    background-color: #bdbdbd; /*#cccc99;*/
+}

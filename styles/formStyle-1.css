@@ -1,0 +1,56 @@
+/*  текст формы для выделения на фоновой картинке */
+.formColor{color:#0cc ; /*#0cc;*/
+ font-weight:bold ;
+}
+.label {
+     width: 170px; /* Ширина блока с текстом */
+     float: left; /* Расположение в одну строку с полем */
+     text-align: right; /* Выравнивание по правому краю */
+   }
+.labelForm{
+ font-weight:bold ;
+}
+.field {
+     width: 250px; /* Ширина поля */
+     margin-left: 10px; /* Расстояние между полем и текстом */
+    /* border: 1px solid #abadb3; */ /* Рамка вокруг текстового поля */
+     padding: 2px; /* Поля вокруг текста */
+   /** text-transform: capitalize; */ /* каждое слово с большой буквы */
+   }
+ /* для пароля, почты, сайта */
+ .field1 {
+     width: 500px; /* Ширина поля */
+     margin-left: 10px; /* Расстояние между полем и текстом */
+     padding: 2px; /* Поля вокруг текста */
+   }
+
+.form-item {
+     margin-bottom: 5px; /* Отступ снизу */
+   }
+
+ .field:focus,.field1:focus { color:blue;
+     background: #cc9;
+   /* #ffe;  border: 1px solid #29B0D9; */
+   }
+
+   #enter p {
+    margin-left: 90px; /* Сдвиг вправо */
+   }
+
+.group_item:hover{
+  border: 2px dashed red;
+ /*  background: #786b59;*/ /* Цвет фона под ссылкой */
+ /*   color: #ffe; *//* Цвет ссылки */
+}
+
+input[type="submit"]:focus{
+color:#fff;
+    background:#936;
+}
+input[type="reset"]:focus{
+color:#fff;
+    background:#9c0;
+}
+.bt{
+    margin-left: 150px;
+}
