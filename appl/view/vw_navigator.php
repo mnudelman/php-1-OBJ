@@ -37,6 +37,21 @@
     </a>
 
     <br><br>
+    <button name="gallerySelect">Выбрать альбом</button>
+
+        <select name="currentGalleryId" class="field">
+            <?php
+            foreach($galleryList as $gallery) {
+                $owner      = $gallery['owner'] ;
+                $galleryid  = $gallery['galleryid'] ;
+                $galleryName= $gallery['galleryname'] ;
+                $text = $owner.':'.$galleryName ;
+                $selected = ( $galleryid == $currentGalleryId ) ? 'selected' : '' ;
+                echo '<option value="'.$galleryid.'"  '.$selected.' >'.$text.'</option>'.LINE_END ;
+            }
+            ?>
+        </select>
+    &nbsp;&nbsp;&nbsp;
 
     <select name="pictPerPage">
         <?php

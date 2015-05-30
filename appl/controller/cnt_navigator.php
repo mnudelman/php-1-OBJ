@@ -20,6 +20,7 @@ class cnt_navigator extends cnt_base
     protected $ownStore = [];     // собственные сохраняемые параметры
     protected $forwardCntName = false; // контроллер, которому передается управление
     //--------------------------------//
+    private $galleryList = [] ;   // список альбомов
     private $imgFiles = [];       // список файлов-картинок
     private $pictPerPage = 10;    // картинок на странице
     private $NAV_PAGE_NUMBER = 10; // число ссылок на страницы навигатора
@@ -46,14 +47,20 @@ class cnt_navigator extends cnt_base
     {
         $this->URL_TO_NAVIGATOR = TaskStore::$htmlDirTop . '/index.php?cnt=cnt_navigator';
         $this->currentGalleryId = TaskStore::getParam('galleryId');
+        $owner = '' ;
+        $this->galleryList = $this->mod->getGallery($owner);
+        if (isset($this->parListPost['gallerySelect'])) {
+            $this->currentGalleryId = $this->parListPost['currentGalleryId'] ;
+            $this->currentGallerySave() ;
+        }
         $this->imgFiles = $this->mod->getImages($this->currentGalleryId); // список картинок
         $this->navRestore();
-        //------- работа   ------------//
-        if (isset($this->parListPost['pictPerPage'])) {    // смена числа картинок/страницу
-            $this->pictPerPage = $this->parListPost['pictPerPage'];
-            $this->navClear();  // очистить для пересчета
+        if ( isset($this->parListPost['enter']) ) {
+            if (isset($this->parListPost['pictPerPage'])) {    // смена числа картинок/страницу
+                $this->pictPerPage = $this->parListPost['pictPerPage'];
+                $this->navClear();  // очистить для пересчета
+            }
         }
-
         $this->pagesListClc();       // разбиение картинок по страницам
         $this->navInit();
         $this->newPageClc(); // вычислить новую страницу
@@ -61,7 +68,22 @@ class cnt_navigator extends cnt_base
 
         parent::prepare();
     }
+    /**
+     * Сохранить атрибуты тек альбома
+     * @param $curId - Id тек альбома
+     */
+    private function currentGallerySave() {
+        // ['owner' => $userlogin,'galleryid' => $galleryId,'galleryname' =>..]
+        $curId = $this->currentGalleryId   ;
+        $curGallery = $this->galleryList[$curId] ;
+        $owner = $curGallery['owner'] ;
+        $gId = $curGallery['galleryid'] ;
+        $gName = $curGallery['galleryname'] ;
+        TaskStore::setParam('galleryId',$gId) ;
+        TaskStore::setParam('galleryOwner',$owner) ;
+        TaskStore::setParam('galleryName',$gName) ;
 
+    }
     /**
      * разнести картинки по страницам
      */
@@ -210,6 +232,8 @@ class cnt_navigator extends cnt_base
     public function viewGo()
     {
         $this->parForView = [              // параметры формы
+            'galleryList'    => $this->galleryList ,
+            'currentGalleryId' => $this->currentGalleryId ,
             'pictPerPage' => $this->pictPerPage,       // картинок на странице
             'currentPage' => $this->currentPage,       // № тек страницы
             'navPageMin' => $this->navPageMin,         // min N страницы в указателе навигатора
