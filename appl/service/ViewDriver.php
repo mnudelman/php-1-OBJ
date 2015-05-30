@@ -11,6 +11,7 @@ class ViewDriver
     private $viewLayout = [];     // таблица форма => шаблонСтраницы
     private $viewComponent = [];  // таблица форма => компонентСтраницы для вывода
 
+    private $msg ;
     //--- тек атрибуты ---//
     private $curCnt = '';       // контроллерИмя
     private $curView = '';      // формаОтображения
@@ -24,12 +25,11 @@ class ViewDriver
         $this->curView = $this->contView[$this->curCnt] ;
         $this->curLayOut= $this->viewLayout[$this->curView] ;
         $this->curComponent = $this->viewComponent[$this->curView] ;
+        $this->msg = TaskStore::getMessage() ;
 
-//        $lf = TaskStore::LINE_FEED ;
-//        echo 'layOut:'.$this->curLayOut.$lf ;
-//        echo 'ViewDriver:curCnt:'.$this->curCnt .$lf;
-//        echo 'ViewDriver:curView:'.$this->curView .$lf ;
-//        echo 'ViewDriver:curLayOut:'.$this->curLayOut.$lf ;
+//        $this->msg->addMessage('DEBUG:'.__METHOD__.':curCnt:'.$this->curCnt) ;
+//        $this->msg->addMessage('DEBUG:'.__METHOD__.':curView:'.$this->curView) ;
+//        $this->msg->addMessage('DEBUG:'.__METHOD__.':curLayOut:'.$this->curLayOut) ;
 
         //  подстановка curView
         foreach ($this->curComponent as $key=>$value) {
@@ -50,7 +50,8 @@ class ViewDriver
             'cnt_profile' => 'vw_userProfile',
             'cnt_gallery' => 'vw_gallery',
             'cnt_picture' => 'vw_pictureEdit',
-            'cnt_pictureShow' => 'vw_pictureShow',
+            'cnt_pictureShow' => 'vw_pictureNav',
+            'cnt_navigator' => 'vw_pictureNav',
             'cnt_default' => 'vw_default'];
 
         $this->viewLayout = [
@@ -59,6 +60,7 @@ class ViewDriver
             'vw_gallery' => 'lt_footer',
             'vw_pictureEdit' => 'lt_footerNo',
             'vw_pictureShow' => 'lt_footerNo',
+            'vw_pictureNav' => 'lt_footerHalf',
             'vw_default' => 'lt_footerNo'];
 
 
@@ -77,9 +79,13 @@ class ViewDriver
         $this->viewComponent['vw_pictureShow'] = [
             'content' => true,
             'footer' => false];
+        $this->viewComponent['vw_pictureShow'] = [  // формы в 2 частях страницы
+            'content' => true,
+            'footer' => false];
+
         $this->viewComponent['vw_pictureNav'] = [  // формы в 2 частях страницы
-            'content' => 'vw_picture',
-            'footer' => 'vm_navigator'];
+            'content' => 'vw_pictureShow',
+            'footer' => 'vw_navigator'];
         $this->viewComponent['vw_default'] = [  // форма отсутствует
             'content' => false,
             'footer' => false];
@@ -101,14 +107,6 @@ class ViewDriver
             }
         }
          $dir = TaskStore::$dirLayout ;
-
-//        $lf = TaskStore::LINE_FEED ;
-//        echo 'dir:'.$dir.$lf ;
-//        echo 'layOut:'.$this->curLayOut.$lf ;
-//        echo 'ViewDriver:curCnt:'.$this->curCnt .$lf;
-//        echo 'ViewDriver:curView:'.$this->curView .$lf ;
-//        echo 'ViewDriver:curLayOut:'.$this->curLayOut.$lf ;
-
 
         include_once $dir.'/'.$this->curLayOut.'.php' ;
     }

@@ -32,6 +32,7 @@ class TaskStore {
     private static $cnt_profileStore = [];
     private static $cnt_galleryStore = [];
     private static $cnt_pictureStore = [];
+    private static $cnt_navigatorStore = [];
     //-------Список сохраняемых параметров-------//
     private static $storedParams = [
         'userName',           // Имя пользователя
@@ -46,12 +47,13 @@ class TaskStore {
         'cnt_profileStore',   // память контроллера profile
         'cnt_galleryStore',   // память контроллера gallery
         'cnt_pictureStore',   // память контроллера picture
+        'cnt_navigatorStore'  // память контроллера navigator
         ];
 
     //------ константы ------------//
 
     const LINE_FEED = '<br>';
-    const LINE_END = '\n';
+    const LINE_END = "\n";
     const ADMIN_LOGIN = 'ADMIN';
     /** статус определяет функциональные возможности */
     const  USER_STAT_ADMIN = 99;  // создание новых разделов, групповое добавление картинок
@@ -106,7 +108,11 @@ class TaskStore {
      * @return bool
      */
     private static function restoreParam($paramName) {
-        return (!isset($_SESSION[$paramName])) ? false : $_SESSION[$paramName] ;
+        if (isset($_SESSION[$paramName])) {
+            return $_SESSION[$paramName] ;
+        } else {
+            return false ;
+        }
     }
     /**
      * @return array -  список директорий для поиска классов по __autoload

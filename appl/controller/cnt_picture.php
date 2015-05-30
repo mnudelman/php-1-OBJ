@@ -30,10 +30,10 @@ class cnt_picture extends cnt_base {
     private $userStat ;
     private $statError = false ;                    //   Ошибка, связанная со статусом
     private $gallerySelectError = false;            // ошибка выбора альбома
-    private $FORWARD_CNT_SHOW = 'picture_show' ;    // условное имя для передачи управления
-    private $FORWARD_CNT_EDIT = 'picture_edit' ;
+    private $FORWARD_CNT_NAVIGATOR = 'cnt_navigator' ; // имя для передачи управления
     private $NEW_COMMENT = 'new!' ;                 //  комментарий к новому изображению
     private $URL_TO_PICTURE ;
+    private $htmlDirTop ;
     //---------------------------------------------------------------//
 
     public function __construct($getArray,$postArray) {
@@ -41,7 +41,7 @@ class cnt_picture extends cnt_base {
             TaskStore::PICTURE_STAT_EDIT : TaskStore::PICTURE_STAT_SHOW ;
 
         $this->URL_TO_PICTURE = TaskStore::$htmlDirTop.'/index.php?cnt=cnt_picture' ;
-
+        $this->htmlDirTop = TaskStore::$htmlDirTop ;
         parent::__construct($getArray,$postArray) ;
 
     }
@@ -57,7 +57,10 @@ class cnt_picture extends cnt_base {
         $userStat = TaskStore::getParam('userStatus') ;
 
         if (isset($this->parListPost['show']) || isset($this->parListGet['show'])) {   // просмотр
-            $this->nameForView = $this->nameForViewShow ;
+           // $this->nameForView = $this->nameForViewShow ;
+
+            $this->forwardCntName = $this->FORWARD_CNT_NAVIGATOR ;  // передача управления для
+
         }elseif ($userStat < TaskStore::USER_STAT_USER) {
             $this->statError = true;
         }
@@ -196,15 +199,22 @@ class cnt_picture extends cnt_base {
      * альтернатива viewGo
      * Через  $pListGet , $pListPost можно передать новые параметры
      */
-    public function getForwardCntName(&$plistGet,&$pListPost) {
-        parent::getForwardCntName($plistGet,$pListPost) ;
+    public function getForwardCntName(&$plistGet,&$plistPost) {
+        $plistGet = [] ;
+       $plistPost = [] ;
+        return $this->forwardCntName ;
+
+
+//        parent::getForwardCntName($plistGet,$plistPost) ;
     }
     public function viewGo() {
         $this->parForView = [
             'imgFiles'    => $this->imgFiles ,
             'dirPict' => TaskStore::$htmlDirTop.'/pictureHeap' ,
             'urlPictEdit' => $this->URL_TO_PICTURE,
-            'isNotEmptyBuffer' => !empty($this->filesBuffer)] ;
+            'isNotEmptyBuffer' => !empty($this->filesBuffer),
+            'htmlDirTop' => $this->htmlDirTop
+            ] ;
 
         parent::viewGo() ;
     }

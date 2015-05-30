@@ -8,7 +8,14 @@
 if (false === $imgFiles) {
 
 }else {
-    foreach ($imgFiles as $imgFile) {
+    //foreach ($imgFiles as $imgFile) {
+    if (!isset($pictMin)) {
+        $pictMin = 0 ;
+        $pictMax = count($imgFiles) - 1 ;
+
+    }
+    for ($i=$pictMin ; $i <= $pictMax; $i++) {
+        $imgFile = $imgFiles[$i] ;
         $file = $imgFile['file'];
         $comment = $imgFile['comment'];
         echo '<div class="imgBlock">' ."\n" ;

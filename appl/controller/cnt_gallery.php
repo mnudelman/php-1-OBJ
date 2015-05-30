@@ -112,17 +112,6 @@ class cnt_gallery extends cnt_base {
         $this->galleryList = $this->mod->getGallery($owner) ;
         $this->currentGallerySave($gId)  ;
     }
-
-
-
-
-
-
-
-
-
-
-
     ////////////////////////////////////////////////////////////////////////////////
     /**
      *  построить массив $ownStore - собственные параметры

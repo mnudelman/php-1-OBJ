@@ -33,16 +33,18 @@ include_once TaskStore::$dirView . '/topMenu.php';
 <div id="contentShowHalph">
 
     <?php
-    include_once TaskStore::$dirView .'/messageForm' ;
+    include_once TaskStore::$dirView .'/messageForm.php' ;
     ?>
     <?php
     include_once $content ;
     ?>
 
 </div>
-<div id="footerHalh">
+<div id="footerHalph">
     <?php
-    include_once $footer ;
+    if (!empty($footer)) {
+        include_once $footer;
+    }
     ?>
 
 </div>

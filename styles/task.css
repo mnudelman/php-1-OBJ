@@ -28,7 +28,7 @@ body{
 #contentShowHalh {
     margin-bottom:100px ;
 }
-#footer,#footerHalf {
+#footer,#footerHalph {
     position: fixed; /* Фиксированное положение */
     height:150px ;
     left: 0; bottom: 0; /* Левый нижний угол */
@@ -39,8 +39,8 @@ body{
     display: block;
    /* border:4px solid darkolivegreen ;*/
 }
-#footerHalf {
-    height:100px ;
+#footerHalph {
+    height:70px ;
 }
 a.menu{
     font-size:20px;
@@ -52,6 +52,6 @@ a.menu{
 a.menu:hover{
     font-style:italic;
 }
-#footer,#topMenu{
+#footer,#footerHalph,#topMenu{
     background-color: #bdbdbd; /*#cccc99;*/
 }

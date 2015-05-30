@@ -28,11 +28,17 @@ class Router {
     public function controllerGo() {
         while (true) {
             $class = $this->contName ;
+
+//            $this->msg->addMessage('DEBUG:'.__METHOD__.':controller:'.$class) ;
+
             $pListGet = $this->paramListGet ;
             $pListPost = $this->paramListPost ;
             $cntr = new $class($pListGet,$pListPost) ;
             $newCnt = $cntr->getForwardCntName($pListGet,$pListPost) ;
             if (!empty($newCnt)  ) {
+
+//                 $this->msg->addMessage('DEBUG:'.__METHOD__.':newCnt:'.$newCnt) ;
+
                 $this->contName = $newCnt ;
                 $this->paramListGet = $pListGet ;
                 $this->paramListPost = $pListPost ;
@@ -40,6 +46,7 @@ class Router {
             }
             break ;
         }
+
         $cntr->viewGo() ;   // вывод формы контроллера
     }
 
